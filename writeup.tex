@@ -1,0 +1,58 @@
+\documentclass[11pt]{article}
+% \pagestyle{empty}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+
+\setlength{\oddsidemargin}{-0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.9 in}
+\setlength{\textwidth}{7.0 in}
+\setlength{\textheight}{9.0 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0.3 in}
+\setlength{\parskip}{0.1 in}
+\usepackage{epsf}
+\usepackage{pseudocode}
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+% \usepackage{times}
+% \usepackage{mathptm}
+
+\def\O{\mathop{\smash{O}}\nolimits}
+\def\o{\mathop{\smash{o}}\nolimits}
+\newcommand{\e}{{\rm e}}
+\newcommand{\R}{{\bf R}}
+\newcommand{\Z}{{\bf Z}}
+
+\title{CS51 - Final Project}
+\author{Ray Chen}
+\date{May 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+\item Extension: Lexicon Semantics Scope:
+
+\textcolor{black}{
+As my extension, I wrote an additional evaluator for lexicon environment semantics. As described it the textbook, it uses similar features as the dynamic environment semantics where the interpreter refers to an environment / table of stored values to determine the evaluation of a variable. Unlike dynamic environments however, lexicon environments take advantage of closures when defining and adding functions to the environment, taking a snapshot of the environment / values defined at the time of recording the new function. Consequently, this makes lexicon environments "more correct" than the dynamic environment.\\\\
+This feature was tested out in expr11 where the expression:\\
+\textit{"let $x = 5$ in let $f = fun \: y -> x + y$ in let $x = 10$ in $f 0$ "}\\\\
+In the lexicon environment, the interpreter spits out a 5 as expected while dynamic environment's interpreter returns a 10. \\\\
+When implementing the lexicon extension, the main 2 features were 1) creating closures for function definitions and 2) creating temp environments for defining recursive functions and overriding said recursive functions.\\\\\
+For addressing closures, I had to make a separate copy of the environment to preserve the original values at hand (this took place in Env.close).\\\\
+For addressing let rec, I had to modify the extend function such that it knows how to update existing environments such that it gives the variable name the proper definition.
+}
+
+\end{enumerate}
+\end{document}
+
+
+
+
+
